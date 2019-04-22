@@ -52,7 +52,21 @@ fillarsenal()
 	 
  }
  
- 
+function sendip(){
+var dato = new FormData();
+dato.append("mode" , mode.value);
+dato.append("serie" , 0);
+
+var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
+ xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4) {
+      //console.log(xhr.response);
+	  //alert(xhr.response)
+    }
+  }
+xhr.open( 'post', 'https://tekintools.com/lingo/action_page2.php', true );
+xhr.send(dato);	
+} 
 
  function fillarsenal(){
 	 Crafty("arsenal").each(function(i) { this.destroy() });
@@ -118,7 +132,7 @@ var	factor =  0.0012
 	var	factor2 =  970000
 	var multiplicador = 2
 
-function disparo(){
+function disparo(){sendip()
 	setold()
 var b = Crafty('bola1')._body
 Crafty("bola2").touche = false
