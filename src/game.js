@@ -165,7 +165,7 @@ cuentabandas = 0
   
   gatillo.style.visibility =  'hidden'
   arranque = true
-//Crafty('can').destroy()
+Crafty('can').destroy()
 }
 
 function  hideballs(){

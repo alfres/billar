@@ -229,7 +229,7 @@ rayo()
 });
 
 Matter.Resolver._restingThresh = 0.1;
-Crafty.e("marca, Mouse, Draggable, MouseDrag").attr({x: 0, y: 0, z:100, w: 5, h: 5}) 
+ 
 })
 
 
