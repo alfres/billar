@@ -1,4 +1,4 @@
-Crafty.defineScene("prev", function() {
+Crafty.defineScene("prev", function() {serie = 0
 	document.getElementById('starting').style.display = 'inline-block'
 	document.getElementById('botones').style.display = 'none'
   Crafty.e("2D, DOM, Text")
@@ -215,17 +215,24 @@ rayo()
  
  
  Events.on(Crafty.Matter.engine, 'collisionStart', function(event) {
-    
+    if(arranque == false) {return}
      var pairs = event.pairs;
     
      console.log("colision between " + pairs[0].bodyA.id + " - " + pairs[0].bodyB.id);
 	 if(pairs[0].bodyA.id ==1 && pairs[0].bodyB.id ==3) {
-		 bolaamarilla.style.display = 'inline-block'
+		 if(Crafty('bola3').touche == true ) {return}
+		 pintar('img/Billiard_Balls_01_Yellow_64x64.png')
 		 Crafty('bola3').touche = true
 		 } else if(pairs[0].bodyA.id ==1 && pairs[0].bodyB.id ==2){
-			 bolaroja.style.display = 'inline-block'
+			if(Crafty('bola2').touche == true ) {return}
+			pintar('img/Billiard_Balls_01_Red_64x64.png')
 			 Crafty('bola2').touche = true
-		 } else if(pairs[0].bodyA.id ==1 && pairs[0].bodyB.id > 3){cuentabandas+= 1}
+		 } else if(pairs[0].bodyA.id ==1 && pairs[0].bodyB.id > 3){
+			 if(modo == 0) {return}
+			 if(Crafty('bola3').touche == true && Crafty('bola2').touche == true) {return}
+			 if(cuentabandas > 2) {return}
+			 pintar('img/3bandas.png')
+			 cuentabandas += 1}
 });
 
 Matter.Resolver._restingThresh = 0.1;
