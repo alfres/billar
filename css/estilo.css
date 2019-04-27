@@ -1,0 +1,56 @@
+ #lb2, #lb, #lc2, #lc,#ld2, #ld{color: white;}
+ #lb2{
+	 color : #ddff99 ;
+	 width: 63px;
+	 display:inline-block;
+	 }
+#lc2, #ld2	{
+ color : #6666ff ;
+	 width: 70px;
+	 display:inline-block;	
+} 
+ 
+ input[type=range] {
+  -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+  width: 150px; /* Specific width is required for Firefox. */
+  background: #ffffff;; /* Otherwise white in Chrome */
+  margin: auto;
+}
+#b{background-image: linear-gradient(to right, white , #669900);}
+#c, #d{
+  background-image: linear-gradient(to right, #6666ff,white,#6666ff);
+}
+#gatillo{
+background-color : #669900 ;
+border: 3px solid black;
+font-size: 20px; 
+width: 400px; 
+height: 37px; 
+visibility: visible	;
+	}
+	
+#gob{
+background-color : #ff6666 ;
+border: 3px solid black;
+font-size: 20px; 
+width: 400px;  
+height: 37px; 
+visibility: hidden;
+
+}	
+
+#st{
+background-color : #ff6666 ;
+border: 3px solid black;
+font-size: 20px; 
+width: 192px;  
+height: 37px; 
+visibility: hidden;
+
+}
+.afino{
+	line-height: 5px;
+	border: 3px solid black;
+background-color : #ddff99 ;
+ height: 17px;	
+}

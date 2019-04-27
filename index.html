@@ -2,9 +2,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <title>billar</title>
 <link rel="icon" href="img/Billiard_Balls_01_Red_64x64.png">
- <style></style>
+<link rel="stylesheet" href="css/estilo.css">
+
  <script type="text/javascript" src="src/crafty-min.js"></script>
  <script src="src/core/matter (2).js"></script>
  <script type="text/javascript" src="src/craftymatter.js"></script>
@@ -13,30 +15,31 @@
   <script type="text/javascript" src="src/components.js"></script>
   <script type="text/javascript" src="src/scenes.js"></script>
  <script> window.onload = Game.load </script>
+
 </head>
 
-<body style='background-color : #b3ffff ;'>
-<div id='marco'  >
+<body style='background-color : black ;'>
+<div id='marco'  ></div>
 
 
-</div>
-<div id='botones' style=' display:none'  >
 
-<button id="gatillo" onclick='disparo()' style='background-color : #ff6666 ;font-size: 20px; width: 400px; height: 37px; visibility: visible' >shot</button>
-<button id="gob" onclick='goback()' style='background-color : #ff6666 ;font-size: 20px; width: 400px;  height: 37px; visibility: hidden;'>go back</button>
-<button id="st" onclick='prev()' style='background-color : #ff6666 ;font-size: 20px; width: 190px;  height: 37px; visibility: hidden;'>restart</button>
-<label id="lb2" for="b">force</label>
-<button onclick='bajar1b()'>-1</button>
-<button onclick='subir1b()'>+1</button>
-<input type="range" id="b" value="80" min="1" max="200" onchange='power()' ondblclick='this.value = 80; power()'>
-<label id="lb" for="b">200</label>&nbsp;&nbsp;&nbsp;&nbsp;
-<label id="lc2" for="c">efect X</label>
-<input type="range" id="c" value="0" min="-10" max="10" onchange='power()' ondblclick='this.value = 0;power() '>
-<label id="lc" for="c">0</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<label id="ld2" for="d">efect Y</label>
-<input type="range" id="d" value="0" min="-10" max="10" onchange='power()' ondblclick='this.value = 0;power() '>
-<label id="ld" for="d">0</label>&nbsp;&nbsp;&nbsp;
-<div id='ser' style='display: inline-block; background-color : blue; color: white; width: 70px; text-align: center;'  >serie 0</div>&nbsp;&nbsp;
+<div id='botones' style=' display:none; width: 1000px;'  >
+
+<button id="gatillo" onclick='disparo()' >SHOT</button>
+<button id="gob" onclick='goback()' >GO BACK</button>
+<button id="st"  onclick='prev()' >RESTART</button>
+<label id="lb2" for="b" >force 80</label>
+<button class='afino' onclick='bajar1b()' >-</button>
+<input  type="range" id="b" value="80" min="1" max="200" onchange='power()' ondblclick='this.value = 80; power()' >
+<button class='afino' onclick='subir1b()' >+</button>
+&nbsp;&nbsp;&nbsp;&nbsp;
+<label id="lc2" for="c" >efectX 0</label>
+<input type="range" id="c" value="0" min="-10" max="10" onchange='power()' ondblclick='this.value = 0;power() ' >
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<label id="ld2" for="d" >efectY 0</label>
+<input type="range" id="d" value="0" min="-10" max="10" onchange='power()' ondblclick='this.value = 0;power() ' >
+&nbsp;&nbsp;&nbsp;
+<div id='ser' style='display: inline-block; background-color : white;  width: 70px; text-align: center;'  >serie 0</div>&nbsp;&nbsp;
 
 
 </div>
