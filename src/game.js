@@ -1,5 +1,5 @@
  var cuentabandas = 0, modo = 0 , muni = 20, arr, fi = 0,  rayx = 0, rayy = 0, arranque = false, serie = 0
- var old1, old2,old3
+ var old1, old2,old3, oldforce
   //bolas 
  var restit = 0.5
  var frict = 0.001
@@ -31,24 +31,21 @@ Runner = Matter.Runner,
  
   function power(){
 polv = b.value 
- lb.textContent = polv
- lc.textContent = c.value
- ld.textContent = d.value
+ lb2.textContent = 'force ' + polv
+ lc2.textContent = 'efectX ' + c.value
+ ld2.textContent = 'efectY ' + d.value
  var fx = Crafty("centro").x + parseInt(document.getElementById('c').value) -1
  var fy = Crafty("centro").y + parseInt(document.getElementById('d').value) -1
  //alert(fx)
  Crafty("efectpoint").attr({x: fx, y: fy, w: 3, h: 3})
  }
  function reseting(){
-	fi = 0
-	f.textContent ='puntos ' + fi
-	ang = 0
-	a.value = 0
-	walk()
-	polv = 100
-	 b.value = polv
-	 lb.textContent = polv
-fillarsenal()
+b.value = 80
+c.value = 0
+d.value = 0
+lb2.textContent = 'force ' + b.value
+ lc2.textContent = 'efectX ' + c.value
+ ld2.textContent = 'efectY ' + d.value
 	 
  }
  
@@ -126,18 +123,23 @@ function por(){
 	rayo()
 	serie = 0
 	ser.textContent = 'serie ' + serie;
+	reseting()
 }
 
 function setold(){
 	old1 = {x: Crafty('bola1').x, y: Crafty('bola1').y}; 
 	old2 = {x: Crafty('bola2').x, y: Crafty('bola2').y}; 
 	old3 = {x: Crafty('bola3').x, y: Crafty('bola3').y}; 
+	oldforce = {force: b.value, efectx: c.value, efecty: d.value};
 }
 
 function goback(){
     Crafty('bola1').x = old1.x; Crafty('bola1').y = old1.y ;
 	Crafty('bola2').x = old2.x; Crafty('bola2').y = old2.y ;
 	Crafty('bola3').x = old3.x; Crafty('bola3').y = old3.y ;
+	b.value = oldforce.force
+	c.value = oldforce.efectx
+	d.value = oldforce.efecty
 	rayo()
 	power()
 	gob.style.visibility = 'hidden';
@@ -232,16 +234,14 @@ function  hideballs(){
 
 	
 
-function  bajar1b(){ b.value = b.value - 1;lb.textContent = b.value ;  rayo()}
-function  subir1b(){ b.value = parseInt(b.value) + 1;lb.textContent = b.value ;  rayo()}
+function  bajar1b(){ b.value = b.value - 1;lb2.textContent = 'force ' + b.value ;  rayo()}
+function  subir1b(){ b.value = parseInt(b.value) + 1;lb2.textContent = 'force ' + b.value ;  rayo()}
 	
 	
 	function  rayo(){
 	Crafty('can').destroy()
 	 
-	document.getElementById('c').value = 0
-	document.getElementById('d').value = 0
-	power()
+	
 
 	var myEntity = Crafty.e('can')
 }
@@ -255,7 +255,7 @@ function duermen(){
 	timer5 = setTimeout(function(){
 		clearTimeout(timer5);
 		hideballs()
-		if(chekcar()== true){gatillo.style.visibility = 'visible'; rayo()
+		if(chekcar()== true){gatillo.style.visibility = 'visible'; rayo();reseting()
 			}else{gob.style.visibility = 'visible';st.style.visibility = 'visible';}
 		
 		Crafty("bol").each(function(i) { this._body.isStatic = false})
