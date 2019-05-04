@@ -1,19 +1,19 @@
- var cuentabandas = 0, modo = 0 , muni = 20, arr, fi = 0,  rayx = 0, rayy = 0, arranque = false, serie = 0
+ var cuentabandas = 0, modo = 0 ,   rayx = 0, rayy = 0, arranque = false, serie = 0
  var old1, old2,old3, oldforce
   //bolas 
  var restit = 0.5
  var frict = 0.001
  var frictAir = 0.01
- var frictStatic = 0.011
+ var frictStatic = 0.021
  var densi = 0.7
- 
+ var slo = 0.1
  
   //bandas
  var restit2 = 0.9
  var frict2 = 0.5
  var frictAir2 = 1
  var frictStatic2 = 1
- var densi2 = 0.1
+ var densi2 = 0.2
  
  var dirx, diry
  var  Engine = Matter.Engine,
@@ -30,16 +30,19 @@ Runner = Matter.Runner,
 
  
   function power(){
-polv = b.value 
- lb2.textContent = 'force ' + polv
+
+ lb2.textContent = 'force ' + b.value
  lc2.textContent = 'efectX ' + c.value
  ld2.textContent = 'efectY ' + d.value
- var fx = Crafty("centro").x + parseInt(document.getElementById('c').value) -1
- var fy = Crafty("centro").y + parseInt(document.getElementById('d').value) -1
+ var fx = Crafty('centro').x + parseInt(document.getElementById('c').value) 
+ var fy = Crafty('centro').y + parseInt(document.getElementById('d').value) 
  //alert(fx)
- Crafty("efectpoint").attr({x: fx, y: fy, w: 3, h: 3})
+ Crafty("efectpoint").attr({x: fx, y: fy, w: 1, h: 1})
  }
  function reseting(){
+	 Crafty('bola1').old = {oldx: Crafty('bola1')._body.position.x, oldy: Crafty('bola1')._body.position.y}
+	 Crafty('bola2').old = {oldx: Crafty('bola2')._body.position.x, oldy: Crafty('bola2')._body.position.y}
+	 Crafty('bola3').old = {oldx: Crafty('bola3')._body.position.x, oldy: Crafty('bola3')._body.position.y}
 b.value = 80
 c.value = 0
 d.value = 0
@@ -65,21 +68,7 @@ xhr.open( 'post', 'https://tekintools.com/lingo/action_page2.php', true );
 xhr.send(dato);	
 } 
 
- function fillarsenal(){
-	 Crafty("arsenal").each(function(i) { this.destroy() });
-	 Crafty("bol").each(function(i) { this.destroy() });
-	 muni = 20
-	  for (var i = 0; i < muni; i++){
-  Crafty.e("2D, DOM, bo,arsenal").attr({x:(10 + (13 * i)), y:490, z:10000000, w: 11, h: 11 })
-  }	
-  
-	arr = Crafty("arsenal").get()
-	
- }
-   
-   function plaipause(){
-if(muni > 0){ Crafty.e("bol"); muni -= 1}else {}
-   }
+ 
 
 Game = {
 	
@@ -107,7 +96,10 @@ prev()
 function prev(){
 document.getElementById('starting').style.display = 'inline-block'
 	document.getElementById('botones').style.display = 'none'
-	
+	Crafty("bol").each(function(i) { this.visible = false})
+	Matter.Body.setPosition(Crafty('bola1')._body, {x : 70.111111111111111, y: 1345.111111111111111})
+	Matter.Body.setPosition(Crafty('bola2')._body, {x : 295.111111111111111, y: 1250.111111111111111})
+	Matter.Body.setPosition(Crafty('bola3')._body, {x : 555.111111111111111, y: 1150.111111111111111})
 }
 
 function por(){
@@ -116,10 +108,14 @@ function por(){
 	gatillo.style.visibility =  'visible'
 	gob.style.visibility =  'hidden'
 	st.style.visibility =  'hidden'	
-	Crafty('bola1').x = 485; Crafty('bola1').y = 345;
-	Crafty('bola2').x = 295; Crafty('bola2').y = 250;
-	Crafty('bola3').x = 555; Crafty('bola3').y = 150;
-	Crafty('puntero').x = 970; Crafty('puntero').y = 280;
+	Matter.Body.setPosition(Crafty('bola1')._body, {x : 70.111111111111111, y: 345.111111111111111})
+	Matter.Body.setPosition(Crafty('bola2')._body, {x : 295.111111111111111, y: 250.111111111111111})
+	Matter.Body.setPosition(Crafty('bola3')._body, {x : 555.111111111111111, y: 150.111111111111111})
+	//Crafty('bola1').x = 485; Crafty('bola1').y = 345;
+	//Crafty('bola2').x = 295; Crafty('bola2').y = 250;
+	//Crafty('bola3').x = 555; Crafty('bola3').y = 150;
+	Crafty("bol").each(function(i) { this.visible = true})
+	Crafty('puntero').x = 533.00; Crafty('puntero').y = 20;
 	rayo()
 	serie = 0
 	ser.textContent = 'serie ' + serie;
@@ -127,16 +123,19 @@ function por(){
 }
 
 function setold(){
-	old1 = {x: Crafty('bola1').x, y: Crafty('bola1').y}; 
-	old2 = {x: Crafty('bola2').x, y: Crafty('bola2').y}; 
-	old3 = {x: Crafty('bola3').x, y: Crafty('bola3').y}; 
+	old1 = {x: Crafty('bola1')._body.position.x, y: Crafty('bola1')._body.position.y}; 
+	old2 = {x: Crafty('bola2')._body.position.x, y: Crafty('bola2')._body.position.y}; 
+	old3 = {x: Crafty('bola3')._body.position.x, y: Crafty('bola3')._body.position.y}; 
 	oldforce = {force: b.value, efectx: c.value, efecty: d.value};
 }
 
 function goback(){
-    Crafty('bola1').x = old1.x; Crafty('bola1').y = old1.y ;
-	Crafty('bola2').x = old2.x; Crafty('bola2').y = old2.y ;
-	Crafty('bola3').x = old3.x; Crafty('bola3').y = old3.y ;
+	Matter.Body.setPosition(Crafty('bola1')._body, {x : old1.x, y: old1.y})
+	Matter.Body.setPosition(Crafty('bola2')._body, {x : old2.x, y: old2.y})
+    //Crafty('bola1')._body.position.x = old1.x; Crafty('bola1')._body.position.y = old1.y ;
+	//Crafty('bola2')._body.position.x = old2.x; Crafty('bola2')._body.position.y = old2.y ;
+	Matter.Body.setPosition(Crafty('bola3')._body, {x : old3.x, y: old3.y})
+	//Crafty('bola3')._body.position.x = old3.x; Crafty('bola3')._body.position.y = old3.y ;alert(Crafty('bola1')._body.position.y)
 	b.value = oldforce.force
 	c.value = oldforce.efectx
 	d.value = oldforce.efecty
@@ -150,56 +149,62 @@ function goback(){
 }
 
 function getfactor(dx,dy){
-	var hipo = (Math.hypot(dx,dy) / factor2)
+	//var hipo = (dx + dy) / 900000
+	var hipo = (Crafty('bola1')._body.position.x + Crafty('bola1')._body.position.y) / 9000000
+	//var hipo = (Math.hypot(dx,dy) / factor2)
+	//alert(hipo)
 		facto =  factor - hipo 	
 	return facto
 }
 var	factor =  0.0012
 	var	factor2 =  970000
-	var multiplicador = 2
+	var multiplicador = 1
 
-function disparo(){sendip()
-	setold()
-	hideballs()
-var b = Crafty('bola1')._body
+function disparo(){   sendip(); setold(); hideballs(); gatillo.blur();
+var bod = Crafty('bola1')._body
+var p = Crafty('puntero')
+var difx, dify
 Crafty("bola2").touche = false
 Crafty("bola3").touche = false
 cuentabandas = 0	
-	if (Crafty('puntero').x < b.position.x +18 && Crafty('puntero').y < b.position.y +18){
-		var difx = b.position.x +7 - Crafty('puntero').x
-		var dify = b.position.y +7 - Crafty('puntero').y
+	if (p.x < bod.position.x && p.y < bod.position.y){
+		 difx = bod.position.x - p.x
+		 dify = bod.position.y - p.y
 		
-	rayx = ((document.getElementById('b').value *(getfactor(difx,dify) ) )  * -1 * difx) * multiplicador
-    rayy = ((document.getElementById('b').value *(getfactor(difx,dify) ) )  * -1 * dify) * multiplicador
-	} else if (Crafty('puntero').x >= b.position.x +18 && Crafty('puntero').y < b.position.y +18){
-		var difx = Crafty('puntero').x - b.position.x +7
-		var dify = b.position.y +7 - Crafty('puntero').y
-		rayx = ((document.getElementById('b').value * (getfactor(difx,dify) ) )  * 1 * difx) * multiplicador
-        rayy = ((document.getElementById('b').value * (getfactor(difx,dify) ))  * -1 * dify) * multiplicador
-	} else if (Crafty('puntero').x >= b.position.x +18 && Crafty('puntero').y >= b.position.y +18){
-		var difx = Crafty('puntero').x - b.position.x +7
-		var dify = Crafty('puntero').y - b.position.y +7  
-		rayx = ((document.getElementById('b').value * (getfactor(difx,dify) ) )  * 1 * difx) * multiplicador
-        rayy = ((document.getElementById('b').value * (getfactor(difx,dify) ))  * 1 * dify) * multiplicador
+	rayx = ((b.value *(getfactor(difx,dify) ) )  * -1 * difx)
+    rayy = ((b.value *(getfactor(difx,dify) ) )  * -1 * dify) 
+	} else if (p.x >= bod.position.x && p.y < bod.position.y){
+		 difx = p.x - bod.position.x
+		 dify = bod.position.y - p.y
+		rayx = ((b.value * (getfactor(difx,dify) ) )  * 1 * difx) 
+        rayy = ((b.value * (getfactor(difx,dify) ))  * -1 * dify)
+	} else if (p.x >= bod.position.x && p.y >= bod.position.y){
+		 difx = p.x - bod.position.x
+		 dify = p.y - bod.position.y  
+		rayx = ((b.value * (getfactor(difx,dify) ) )  * 1 * difx) 
+        rayy = ((b.value * (getfactor(difx,dify) ))  * 1 * dify) 
    
-	} else if (Crafty('puntero').x < b.position.x +18 && Crafty('puntero').y >= b.position.y +18){
-		var difx = b.position.x +7 - Crafty('puntero').x
-		var dify = Crafty('puntero').y - b.position.y +7  
-		rayx = ((document.getElementById('b').value * (getfactor(difx,dify) ) )  * -1 * difx) * multiplicador
-        rayy = ((document.getElementById('b').value * (getfactor(difx,dify) ))  * 1 * dify) * multiplicador
+	} else if (p.x < bod.position.x && p.y >= bod.position.y){
+		 difx = bod.position.x - p.x
+		 dify = p.y - bod.position.y  
+		rayx = ((b.value * (getfactor(difx,dify) ) )  * -1 * difx) 
+        rayy = ((b.value * (getfactor(difx,dify) ))  * 1 * dify) 
 	}
 	
 	//info.innerText = 'rayx____' + rayx +'_____nrayy   ' + rayy + '______factor ' + '______' + getfactor(difx,dify)
+	console.log('posx____' + bod.position.x +'_____posy   ' + bod.position.y );
 	
-	
-	
-	var px =( 0 + (parseInt(document.getElementById('c').value)*100))
-	var py =( 0 + (parseInt(document.getElementById('d').value)*100))
-	
-
+	var multiefect = 10
+	var px =( bod.position.x + (parseInt(document.getElementById('c').value)* multiefect))
+	var py =( bod.position.y + (parseInt(document.getElementById('d').value)* multiefect))
+rayx = (rayx * multiplicador)
+rayy = (rayy * multiplicador)	
+//rayx = trunc(rayx, 2)
+//rayy = trunc(rayy, 2)
+console.log('rayx____' + rayx +'_____nrayy   ' + rayy + '______factor ' + '______' + getfactor(difx,dify));
 
 		    Body.applyForce(
-    b,
+    bod,
     { x: px , y: py},
     { x:rayx, y: rayy}
   )
@@ -209,6 +214,13 @@ cuentabandas = 0
 Crafty('can').destroy()
 }
 
+function trunc (x, posiciones = 0) {
+  var s = x.toString()
+  var l = s.length
+  var decimalLength = s.indexOf('.') + 1
+  var numStr = s.substr(0, decimalLength + posiciones)
+  return Number(numStr)
+}
 
 function  pintar(cosa){
 	var newNode 
@@ -240,17 +252,14 @@ function  subir1b(){ b.value = parseInt(b.value) + 1;lb2.textContent = 'force ' 
 	
 	function  rayo(){
 	Crafty('can').destroy()
-	 
-	
-
-	var myEntity = Crafty.e('can')
+	 var myEntity = Crafty.e('can')
 }
 
 function duermen(){
 	var contador = true
 	Crafty("bol").each(function(i) { if(this.quieto == false){ contador = false; }})
 		if(contador == true){
-			Crafty("bol").each(function(i) { this._body.isStatic = true})
+			Crafty("bol").each(function(i) { Matter.Body.setVelocity(this._body, {x: 0, y: 0})})
 	
 	timer5 = setTimeout(function(){
 		clearTimeout(timer5);
@@ -260,7 +269,7 @@ function duermen(){
 		
 		Crafty("bol").each(function(i) { this._body.isStatic = false})
 		
-		}, 1000);
+		}, 300);
 		}
 		
 		

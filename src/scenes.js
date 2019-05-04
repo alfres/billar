@@ -1,17 +1,4 @@
-Crafty.defineScene("prev", function() {serie = 0
-	document.getElementById('starting').style.display = 'inline-block'
-	document.getElementById('botones').style.display = 'none'
-  Crafty.e("2D, DOM, Text")
-  //.color("grey")
-  .attr({x: 0, y: 300, w: 1000, h: 150 , z: 40000001}) 
-.textAlign('center').textFont({ size: '24px' }).text('press ENTER key to start')
 
- Crafty.bind('KeyDown', function(event) {
-	  if(event.key === 13 || event.key === Crafty.keys.ENTER){Crafty.unbind('KeyDown'); Crafty.scene("portada")}
-	  
-	  
-	  })
-})
 Crafty.defineScene("portada", function() {
 	document.getElementById('starting').style.display = 'none'
 	document.getElementById('botones').style.display = 'inline-block'
@@ -20,13 +7,13 @@ Crafty.defineScene("portada", function() {
 	st.style.visibility =  'hidden'
 power()
 Crafty.e("2D, DOM,  Color, puntero")
- .attr({x: 970, y: 280, z: 100, w: 1, h: 1})
+ .attr({x: 503.00, y: 20, z: 100, w: 1, h: 1})
  .color("white").origin("center")	
  
  //bolas 
- Crafty.e("bol, bo,  bola1").attr({x: 485.00, y: 345.00, w: 36, h: 36,
+ Crafty.e("bol, bo,  bola1").attr({x: 1485.00, y: 1345.00, w: 35, h: 35,
   matter : {
-			
+			slop: slo,
 			restitution : restit,
 			friction: frict,
 			frictionAir: frictAir,
@@ -38,21 +25,22 @@ Crafty.e("2D, DOM,  Color, puntero")
 		
 	  
 })
- .attach(Crafty.e("cen, centro").attr({x: 503.00, y: 363.00, w: 1, h: 1}))
- .attach(Crafty.e("cen,efectpoint").attr({x: 502.00, y: 362.00, w: 3, h: 3}))
+ .attach(Crafty.e("cen, centro").attr({x: 1503.00, y: 1363.00, w: 1, h: 1}))
+ .attach(Crafty.e("cen,efectpoint").attr({x: 1503.00, y: 1363.00, w: 1, h: 1})
+ .attach(Crafty.e("cen").attr({x: 1502.00, y: 1362.00, w: 3, h: 3})))
 .attr({old: {oldx:this.x, oldy:this.y} })
 .bind("EnterFrame", function() { if(arranque == false) return
-if(this.old['oldx'] == (this.x.toFixed(2)) && this.old['oldy'] == (this.y.toFixed(2))){
+if(this.old['oldx'] == (this.x.toFixed(1)) && this.old['oldy'] == (this.y.toFixed(1))){
 this.quieto = true
 } else{
-	this.old['oldx'] = this.x.toFixed(2)
-	this.old['oldy'] = this.y.toFixed(2)
+	this.old['oldx'] = this.x.toFixed(1)
+	this.old['oldy'] = this.y.toFixed(1)
 	this.quieto = false
 	
 }
 //lb.textContent = duermen()
 if(duermen()) { arranque = false}
-});
+}).visible = false;
  
  
  
@@ -62,7 +50,8 @@ if(duermen()) { arranque = false}
  
  Crafty.e("bol,bo2,bola2").attr({x: 295, y: 250, w: 36, h: 36,
     matter : {
-			inertia: Infinity,
+		slop: slo,
+			
 			restitution : restit,
 			friction: frict,
 			frictionAir: frictAir,
@@ -72,7 +61,7 @@ if(duermen()) { arranque = false}
 			collisionFilter: {group: 1}
 		}
   })
- .attach(Crafty.e("cen, centro2").attr({x: 313, y: 268, w: 1, h: 1}))
+ 
  .attr({old: {oldx:this.x, oldy:this.y} })
 .bind("EnterFrame", function() { 
 if(this.old['oldx'] == (this.x.toFixed(2)) && this.old['oldy'] == (this.y.toFixed(2))){
@@ -86,12 +75,13 @@ this.quieto = true
 //lb.textContent = this.quieto
 
 
-});
+}).visible = false;
  
    Crafty.e("bol,bo3,bola3")
  .attr({x: 555, y: 150, w: 36, h: 36,
    matter : {
-			inertia: Infinity,
+	   slop: slo,
+			
 			restitution : restit,
 			friction: frict,
 			frictionAir: frictAir,
@@ -101,7 +91,7 @@ this.quieto = true
 			collisionFilter: {group: 1}
 		}
  })
- .attach(Crafty.e("cen, centro3").attr({x: 573, y: 168, w: 1, h: 1}))
+
 .attr({old: {oldx:this.x, oldy:this.y} })
 .bind("EnterFrame", function() { 
 if(this.old['oldx'] == (this.x.toFixed(2)) && this.old['oldy'] == (this.y.toFixed(2))){
@@ -114,8 +104,8 @@ this.quieto = true
 }
 //lb.textContent = this.quieto
 
-});
-rayo()	
+}).visible = false;
+	
  
  
  
@@ -218,7 +208,7 @@ rayo()
     if(arranque == false) {return}
      var pairs = event.pairs;
     
-     console.log("colision between " + pairs[0].bodyA.id + " - " + pairs[0].bodyB.id);
+     //console.log("colision between " + pairs[0].bodyA.id + " - " + pairs[0].bodyB.id);
 	 if(pairs[0].bodyA.id ==1 && pairs[0].bodyB.id ==3) {
 		 if(Crafty('bola3').touche == true ) {return}
 		 pintar('img/Billiard_Balls_01_Yellow_64x64.png')

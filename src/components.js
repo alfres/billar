@@ -6,20 +6,20 @@ Crafty.c('can', {
 		this.attr({x: 0, y: 0, w: 1000, h: 540});
 		this.bind("Draw", function(Data) { 
 		var ctx = Data.ctx
-		ctx.lineWidth = 1;
-		ctx.beginPath();
-ctx.arc(Crafty('bola1').x +18, Crafty('bola1').y +18, 100, 0, Math.PI*2); 
-ctx.closePath();
-ctx.stroke();
+		ctx.lineWidth = 0.3;
+		//ctx.beginPath();
+//ctx.arc(Crafty('bola1').x +18, Crafty('bola1').y +18, 100, 0, Math.PI*2); 
+//ctx.closePath();
+//ctx.stroke();
 ctx.beginPath();
-ctx.moveTo(Crafty('bola1').x +18, Crafty('bola1').y +18);
+ctx.moveTo(Crafty('bola1')._body.position.x , Crafty('bola1')._body.position.y);
 ctx.lineTo(Crafty('puntero').x , Crafty('puntero').y );
 ctx.stroke(); 
         
 		
 		});
 		
-		this.bind("NoCanvas", function() { alert(this.y); });
+		this.bind("NoCanvas", function() { alert("NoCanvas"); });
 		//Crafty.DrawManager.addCanvas(this)
 	  }
 	 
