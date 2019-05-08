@@ -1,21 +1,6 @@
  var cuentabandas = 0, modo = 0 ,   rayx = 0, rayy = 0, arranque = false, serie = 0
  var old1, old2,old3, oldforce
-  //bolas 
- var restit = 0.5
- var frict = 0.001
- var frictAir = 0.01
- var frictStatic = 0.021
- var densi = 0.7
- var slo = 0.1
- 
-  //bandas
- var restit2 = 0.9
- var frict2 = 0.5
- var frictAir2 = 1
- var frictStatic2 = 1
- var densi2 = 0.2
- 
- var dirx, diry
+
  var  Engine = Matter.Engine,
        Events = Matter.Events,
         Constraint = Matter.Constraint,
@@ -32,12 +17,9 @@ Runner = Matter.Runner,
   function power(){
 
  lb2.textContent = 'force ' + b.value
- lc2.textContent = 'efectX ' + c.value
- ld2.textContent = 'efectY ' + d.value
- var fx = Crafty('centro').x + parseInt(document.getElementById('c').value) 
- var fy = Crafty('centro').y + parseInt(document.getElementById('d').value) 
- //alert(fx)
- Crafty("efectpoint").attr({x: fx, y: fy, w: 1, h: 1})
+ lc2.textContent = 'torque ' + c.value
+
+
  }
  function reseting(){
 	 Crafty('bola1').old = {oldx: Crafty('bola1')._body.position.x, oldy: Crafty('bola1')._body.position.y}
@@ -45,10 +27,10 @@ Runner = Matter.Runner,
 	 Crafty('bola3').old = {oldx: Crafty('bola3')._body.position.x, oldy: Crafty('bola3')._body.position.y}
 b.value = 80
 c.value = 0
-d.value = 0
+
 lb2.textContent = 'force ' + b.value
- lc2.textContent = 'efectX ' + c.value
- ld2.textContent = 'efectY ' + d.value
+ lc2.textContent = 'torque ' + c.value
+
 	 
  }
  
@@ -111,9 +93,7 @@ function por(){
 	Matter.Body.setPosition(Crafty('bola1')._body, {x : 70.111111111111111, y: 345.111111111111111})
 	Matter.Body.setPosition(Crafty('bola2')._body, {x : 295.111111111111111, y: 250.111111111111111})
 	Matter.Body.setPosition(Crafty('bola3')._body, {x : 555.111111111111111, y: 150.111111111111111})
-	//Crafty('bola1').x = 485; Crafty('bola1').y = 345;
-	//Crafty('bola2').x = 295; Crafty('bola2').y = 250;
-	//Crafty('bola3').x = 555; Crafty('bola3').y = 150;
+
 	Crafty("bol").each(function(i) { this.visible = true})
 	Crafty('puntero').x = 533.00; Crafty('puntero').y = 20;
 	rayo()
@@ -126,19 +106,16 @@ function setold(){
 	old1 = {x: Crafty('bola1')._body.position.x, y: Crafty('bola1')._body.position.y}; 
 	old2 = {x: Crafty('bola2')._body.position.x, y: Crafty('bola2')._body.position.y}; 
 	old3 = {x: Crafty('bola3')._body.position.x, y: Crafty('bola3')._body.position.y}; 
-	oldforce = {force: b.value, efectx: c.value, efecty: d.value};
+	oldforce = {force: b.value, efectx: c.value};
 }
 
 function goback(){
 	Matter.Body.setPosition(Crafty('bola1')._body, {x : old1.x, y: old1.y})
 	Matter.Body.setPosition(Crafty('bola2')._body, {x : old2.x, y: old2.y})
-    //Crafty('bola1')._body.position.x = old1.x; Crafty('bola1')._body.position.y = old1.y ;
-	//Crafty('bola2')._body.position.x = old2.x; Crafty('bola2')._body.position.y = old2.y ;
 	Matter.Body.setPosition(Crafty('bola3')._body, {x : old3.x, y: old3.y})
-	//Crafty('bola3')._body.position.x = old3.x; Crafty('bola3')._body.position.y = old3.y ;alert(Crafty('bola1')._body.position.y)
 	b.value = oldforce.force
 	c.value = oldforce.efectx
-	d.value = oldforce.efecty
+	
 	rayo()
 	power()
 	gob.style.visibility = 'hidden';
@@ -149,78 +126,54 @@ function goback(){
 }
 
 function getfactor(dx,dy){
-	//var hipo = (dx + dy) / 900000
-	var hipo = (Crafty('bola1')._body.position.x + Crafty('bola1')._body.position.y) / 9000000
-	//var hipo = (Math.hypot(dx,dy) / factor2)
-	//alert(hipo)
-		facto =  factor - hipo 	
+	var	factor =  0.0012
+	var	factor2 =  97
+	var hipo = (Math.hypot(dx,dy) / factor2)
+	// alert(hipo)
+		facto =  factor / hipo 	
 	return facto
 }
-var	factor =  0.0012
-	var	factor2 =  970000
-	var multiplicador = 1
+
+	
 
 function disparo(){   sendip(); setold(); hideballs(); gatillo.blur();
 var bod = Crafty('bola1')._body
 var p = Crafty('puntero')
-var difx, dify
+// var difx, dify
 Crafty("bola2").touche = false
 Crafty("bola3").touche = false
 cuentabandas = 0	
-	if (p.x < bod.position.x && p.y < bod.position.y){
-		 difx = bod.position.x - p.x
-		 dify = bod.position.y - p.y
-		
-	rayx = ((b.value *(getfactor(difx,dify) ) )  * -1 * difx)
-    rayy = ((b.value *(getfactor(difx,dify) ) )  * -1 * dify) 
-	} else if (p.x >= bod.position.x && p.y < bod.position.y){
-		 difx = p.x - bod.position.x
-		 dify = bod.position.y - p.y
-		rayx = ((b.value * (getfactor(difx,dify) ) )  * 1 * difx) 
-        rayy = ((b.value * (getfactor(difx,dify) ))  * -1 * dify)
-	} else if (p.x >= bod.position.x && p.y >= bod.position.y){
-		 difx = p.x - bod.position.x
-		 dify = p.y - bod.position.y  
-		rayx = ((b.value * (getfactor(difx,dify) ) )  * 1 * difx) 
-        rayy = ((b.value * (getfactor(difx,dify) ))  * 1 * dify) 
-   
-	} else if (p.x < bod.position.x && p.y >= bod.position.y){
-		 difx = bod.position.x - p.x
-		 dify = p.y - bod.position.y  
-		rayx = ((b.value * (getfactor(difx,dify) ) )  * -1 * difx) 
-        rayy = ((b.value * (getfactor(difx,dify) ))  * 1 * dify) 
-	}
+	       if (p.x <  bod.position.x && p.y <   bod.position.y){ rayx = -1;  rayy = -1 
+	} else if (p.x >= bod.position.x && p.y <   bod.position.y){ rayx = 1;  rayy = -1 
+	} else if (p.x >= bod.position.x && p.y >=  bod.position.y){ rayx = 1;  rayy = 1 
+    } else if (p.x <  bod.position.x && p.y >=  bod.position.y){ rayx = -1; rayy = 1 
+    }
 	
-	//info.innerText = 'rayx____' + rayx +'_____nrayy   ' + rayy + '______factor ' + '______' + getfactor(difx,dify)
+	var fa = getfactor(dif(bod.position.x, p.x ),dif(bod.position.y, p.y ))
+var multiplicador = 5
+var rayx2 = b.value * fa   * (rayx) * dif(bod.position.x, p.x ) * multiplicador
+var rayy2 = b.value * fa   * (rayy) * dif(bod.position.y, p.y ) * multiplicador
+
 	console.log('posx____' + bod.position.x +'_____posy   ' + bod.position.y );
-	
-	var multiefect = 10
-	var px =( bod.position.x + (parseInt(document.getElementById('c').value)* multiefect))
-	var py =( bod.position.y + (parseInt(document.getElementById('d').value)* multiefect))
-rayx = (rayx * multiplicador)
-rayy = (rayy * multiplicador)	
-//rayx = trunc(rayx, 2)
-//rayy = trunc(rayy, 2)
-console.log('rayx____' + rayx +'_____nrayy   ' + rayy + '______factor ' + '______' + getfactor(difx,dify));
+	console.log('punterox____' + p.x +'_____punteroy   ' + p.y );
+    console.log('rayx____' + rayx2 +'_____nrayy   ' + rayy2 + '______factor ' + '______' + fa);
 
 		    Body.applyForce(
     bod,
-    { x: px , y: py},
-    { x:rayx, y: rayy}
+    { x: bod.position.x , y: bod.position.y},
+    { x:rayx2, y: rayy2}
   )
-  
+  Body.setAngularVelocity( bod, parseInt(c.value)  * parseInt(b.value) / 2000)
   gatillo.style.visibility =  'hidden'
   arranque = true
-Crafty('can').destroy()
+ Crafty('can').destroy()
 }
 
-function trunc (x, posiciones = 0) {
-  var s = x.toString()
-  var l = s.length
-  var decimalLength = s.indexOf('.') + 1
-  var numStr = s.substr(0, decimalLength + posiciones)
-  return Number(numStr)
+function  dif(bo, pu){
+return (Math.max(bo, pu) - Math.min(bo, pu))
+	
 }
+
 
 function  pintar(cosa){
 	var newNode 
@@ -240,11 +193,8 @@ function  hideballs(){
 	elementList.forEach(function(element) {
   document.getElementById('botones').removeChild(element);
 });
-	//elemento.removeChild(child)
 
 }
-
-	
 
 function  bajar1b(){ b.value = b.value - 1;lb2.textContent = 'force ' + b.value ;  rayo()}
 function  subir1b(){ b.value = parseInt(b.value) + 1;lb2.textContent = 'force ' + b.value ;  rayo()}
@@ -259,7 +209,10 @@ function duermen(){
 	var contador = true
 	Crafty("bol").each(function(i) { if(this.quieto == false){ contador = false; }})
 		if(contador == true){
-			Crafty("bol").each(function(i) { Matter.Body.setVelocity(this._body, {x: 0, y: 0})})
+			Crafty("bol").each(function(i) {
+				Matter.Body.setVelocity(this._body, {x: 0, y: 0})
+				Body.setAngularVelocity( this._body ,0)
+				})
 	
 	timer5 = setTimeout(function(){
 		clearTimeout(timer5);
@@ -282,10 +235,12 @@ function beep() {
 }
 
 function chekcar(){if(modo == 0){
-	if(Crafty("bola3").touche == true && Crafty("bola2").touche == true){beep();serie += 1; ser.textContent = 'serie ' + serie; return true}
+	if(Crafty("bola3").touche == true && Crafty("bola2").touche == true){
+		beep();serie += 1; ser.textContent = 'serie ' + serie; return true}
 	
 } else{
-if(Crafty("bola3").touche == true && Crafty("bola2").touche == true && cuentabandas > 2){beep();serie += 1;ser.textContent = 'serie ' + serie;return true}
+if(Crafty("bola3").touche == true && Crafty("bola2").touche == true && cuentabandas > 2){
+	beep();serie += 1;ser.textContent = 'serie ' + serie;return true}
 }
 return false
 }

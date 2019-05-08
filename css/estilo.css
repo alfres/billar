@@ -12,11 +12,11 @@
  
  input[type=range] {
   -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
-  width: 150px; /* Specific width is required for Firefox. */
+  width: 160px; /* Specific width is required for Firefox. */
   background: #ffffff;; /* Otherwise white in Chrome */
   margin: auto;
 }
-#b{background-image: linear-gradient(to right, white , #669900);}
+#b{background-image: linear-gradient(to right, white , #669900); width: 297px;}
 #c, #d{
   background-image: linear-gradient(to right, #6666ff,white,#6666ff);
 }
