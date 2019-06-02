@@ -77,7 +77,7 @@ Crafty.Matter.init({
 	}
 });
   Crafty.sprite("img/table.png", {table:[0,0,4551,2570]});
-  Crafty.sprite("img/triangle.png", {triangle:[0,0,1023,1054]});
+ 
   Crafty.sprite("img/ball_1.png", {bo1:[0,0,141,141]});
   Crafty.sprite("img/ball_2.png", {bo2:[0,0,141,141]});
   Crafty.sprite("img/ball_3.png", {bo3:[0,0,141,141]});
