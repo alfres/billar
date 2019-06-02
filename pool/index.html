@@ -1,0 +1,62 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<title>POOL</title>
+<link rel="icon" href="img/ball_8.png">
+<link rel="stylesheet" href="css/estilo.css">
+
+ <script type="text/javascript" src="../src/crafty-min.js"></script>
+ <script src="../src/core/matter (2).js"></script>
+ <script type="text/javascript" src="../src/craftymatter.js"></script>
+  
+  <script type="text/javascript" src="src/game.js"></script>
+  <script type="text/javascript" src="src/components.js"></script>
+  <script type="text/javascript" src="src/scenes.js"></script>
+ <script> window.onload = Game.load </script>
+
+</head>
+
+<body onmouseenter='Crafty("can").visible = false' style='background-color : black ;'>
+<div id='arr'  style='background-color : white ;'></div>
+<div id='marco'  ></div>
+
+
+
+<div id='botones'  style=' display:none; width: 1000px;' onmouseenter='Crafty("can").visible = false' >
+
+<button  id="gatillo" onclick='disparo()' onmouseenter='Crafty("can").visible = true'>SHOT</button>
+<!-- <button id="gob" onclick='goback()' >GO BACK</button> -->
+
+<div id='ser' style='display: inline-block;   text-align: center;'  ></div>
+<button id="st"  onclick='prev()' >RESTART</button><br>
+<label id="lb2" for="b" >force 80</label>
+<button class='afino' onclick='bajar1b()' >-</button>
+<input  type="range" id="b" value="50" min="1" max="200" onchange='power()' ondblclick='this.value = 80; power()' >
+<button class='afino' onclick='subir1b()' >+</button>
+&nbsp;&nbsp;&nbsp;&nbsp;
+
+<label id="lc2" for="c" >torque 0</label>
+<input type="range" id="c" value="0" min="-10" max="10" onchange='power()' ondblclick='this.value = 0;power() ' >
+&nbsp;
+
+
+
+
+
+</div>
+
+
+<div id='starting'  style='display: block'>
+<br>
+<button id="gatillo2"  style='' onclick='por()'>START</button>
+<select style='margin: right;' id='mode' onchange='modo = parseInt(this.value); '>
+  <option value= 0>FRANCES</option>
+
+  <option selected='true' value= 2 >AMERICANO</option>
+</select>
+<button id="st2" onclick='window.location = "playvid.html"'>VIDEO HELP</button>
+</div>
+ </body>
+</html>
