@@ -1,4 +1,4 @@
- var cuentabandas = 0, modo = 0 ,   rayx = 0, rayy = 0, arranque = false, serie = 0
+ var cuentabandas = 0, modo = 0 ,   arranque = false, serie = 0
  var old1, old2,old3, oldforce
 
  var  Engine = Matter.Engine,
@@ -15,22 +15,17 @@ Runner = Matter.Runner,
 
  
   function power(){
-
  lb2.textContent = 'force ' + b.value
  lc2.textContent = 'torque ' + c.value
-
-
- }
+}
+ 
  function reseting(){
-	 Crafty('bola1').old = {oldx: Crafty('bola1')._body.position.x, oldy: Crafty('bola1')._body.position.y}
-	 Crafty('bola2').old = {oldx: Crafty('bola2')._body.position.x, oldy: Crafty('bola2')._body.position.y}
-	 Crafty('bola3').old = {oldx: Crafty('bola3')._body.position.x, oldy: Crafty('bola3')._body.position.y}
+	 Crafty("bol").each(function(i) { this.old = {oldx: this._body.position.x, oldy: this._body.position.y}})
+
 b.value = 80
 c.value = 0
 
-lb2.textContent = 'force ' + b.value
- lc2.textContent = 'torque ' + c.value
-
+power()
 	 
  }
  
@@ -84,12 +79,12 @@ document.getElementById('starting').style.display = 'inline-block'
 	Matter.Body.setPosition(Crafty('bola3')._body, {x : 555.111111111111111, y: 1150.111111111111111})
 }
 
-function por(){
+function por(){if(mode.value == 2){return window.location = "pool/index.html"}
 	document.getElementById('starting').style.display = 'none'
 	document.getElementById('botones').style.display = 'inline-block'
 	gatillo.style.visibility =  'visible'
 	gob.style.visibility =  'hidden'
-	st.style.visibility =  'hidden'	
+	st.style.backgroundColor = '#993300'	
 	Matter.Body.setPosition(Crafty('bola1')._body, {x : 70.111111111111111, y: 345.111111111111111})
 	Matter.Body.setPosition(Crafty('bola2')._body, {x : 295.111111111111111, y: 250.111111111111111})
 	Matter.Body.setPosition(Crafty('bola3')._body, {x : 555.111111111111111, y: 150.111111111111111})
@@ -119,7 +114,7 @@ function goback(){
 	rayo()
 	power()
 	gob.style.visibility = 'hidden';
-	st.style.visibility = 'hidden';
+	st.style.backgroundColor = '#993300';
 	gatillo.style.visibility = 'visible';
 	serie = 0
 	ser.textContent = 'serie ' + serie;
@@ -130,18 +125,16 @@ function getfactor(dx,dy){
 	var	factor2 =  97
 	var hipo = (Math.hypot(dx,dy) / factor2)
 	// alert(hipo)
-		facto =  factor / hipo 	
+		var facto =  factor / hipo 	
 	return facto
 }
 
 	
 
 function disparo(){   sendip(); setold(); hideballs(); gatillo.blur();
-var bod = Crafty('bola1')._body
-var p = Crafty('puntero')
-// var difx, dify
-Crafty("bola2").touche = false
-Crafty("bola3").touche = false
+var bod = Crafty('bola1')._body ,  p = Crafty('puntero') 
+var  rayx = 0, rayy = 0, rayx2, rayy2, multiplicador = 5, fa
+Crafty("bola2").touche = false;  Crafty("bola3").touche = false
 cuentabandas = 0	
 	       if (p.x <  bod.position.x && p.y <   bod.position.y){ rayx = -1;  rayy = -1 
 	} else if (p.x >= bod.position.x && p.y <   bod.position.y){ rayx = 1;  rayy = -1 
@@ -149,20 +142,20 @@ cuentabandas = 0
     } else if (p.x <  bod.position.x && p.y >=  bod.position.y){ rayx = -1; rayy = 1 
     }
 	
-	var fa = getfactor(dif(bod.position.x, p.x ),dif(bod.position.y, p.y ))
-var multiplicador = 5
-var rayx2 = b.value * fa   * (rayx) * dif(bod.position.x, p.x ) * multiplicador
-var rayy2 = b.value * fa   * (rayy) * dif(bod.position.y, p.y ) * multiplicador
+fa = getfactor(dif(bod.position.x, p.x ),dif(bod.position.y, p.y ))
+
+ rayx2 = b.value * fa   * (rayx) * dif(bod.position.x, p.x ) * multiplicador
+ rayy2 = b.value * fa   * (rayy) * dif(bod.position.y, p.y ) * multiplicador
 
 	console.log('posx____' + bod.position.x +'_____posy   ' + bod.position.y );
 	console.log('punterox____' + p.x +'_____punteroy   ' + p.y );
     console.log('rayx____' + rayx2 +'_____nrayy   ' + rayy2 + '______factor ' + '______' + fa);
 
-		    Body.applyForce(
-    bod,
+		    Body.applyForce( bod,
     { x: bod.position.x , y: bod.position.y},
     { x:rayx2, y: rayy2}
   )
+  
   Body.setAngularVelocity( bod, parseInt(c.value)  * parseInt(b.value) / 2000)
   gatillo.style.visibility =  'hidden'
   arranque = true
@@ -171,8 +164,7 @@ var rayy2 = b.value * fa   * (rayy) * dif(bod.position.y, p.y ) * multiplicador
 
 function  dif(bo, pu){
 return (Math.max(bo, pu) - Math.min(bo, pu))
-	
-}
+	}
 
 
 function  pintar(cosa){
@@ -196,13 +188,13 @@ function  hideballs(){
 
 }
 
-function  bajar1b(){ b.value = b.value - 1;lb2.textContent = 'force ' + b.value ;  rayo()}
-function  subir1b(){ b.value = parseInt(b.value) + 1;lb2.textContent = 'force ' + b.value ;  rayo()}
+function  bajar1b(){ b.value = b.value - 1; power() ;  rayo()}
+function  subir1b(){ b.value = parseInt(b.value) + 1; power() ;  rayo()}
 	
 	
 	function  rayo(){
 	Crafty('can').destroy()
-	 var myEntity = Crafty.e('can')
+	Crafty.e('can')
 }
 
 function duermen(){
@@ -218,9 +210,7 @@ function duermen(){
 		clearTimeout(timer5);
 		hideballs()
 		if(chekcar()== true){gatillo.style.visibility = 'visible'; rayo();reseting()
-			}else{gob.style.visibility = 'visible';st.style.visibility = 'visible';}
-		
-		Crafty("bol").each(function(i) { this._body.isStatic = false})
+			}else{gob.style.visibility = 'visible';st.style.backgroundColor = '#ff0066';}
 		
 		}, 300);
 		}

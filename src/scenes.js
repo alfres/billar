@@ -27,7 +27,7 @@ Crafty.defineScene("portada", function() {
 	document.getElementById('botones').style.display = 'inline-block'
 	gatillo.style.visibility =  'visible'
 	gob.style.visibility =  'hidden'
-	st.style.visibility =  'hidden'
+	st.style.backgroundColor = '#993300'
 power()
 Crafty.e("2D, DOM,  Color, puntero")
  .attr({x: 503.00, y: 20, z: 100, w: 1, h: 1})
@@ -50,7 +50,7 @@ if(duermen()) { arranque = false}
 })
  
  
- Crafty.e("bol,bo2,bola2").attr({x: 295, y: 250, w: 36, h: 36,  matter : bolmater})  
+ Crafty.e("bol,bo2,bola2").attr({x: 295, y: 250, w: 35, h: 35,  matter : bolmater})  
  
  .attr({old: {oldx:this.x, oldy:this.y} })
 .bind("EnterFrame", function() { 
@@ -65,7 +65,7 @@ this.quieto = true
 })
  
  Crafty.e("bol,bo3,bola3")
- .attr({x: 555, y: 150, w: 36, h: 36,  matter : bolmater})
+ .attr({x: 555, y: 150, w: 35, h: 35,  matter : bolmater})
 
 .attr({old: {oldx:this.x, oldy:this.y} })
 .bind("EnterFrame", function() { 
