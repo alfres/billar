@@ -218,7 +218,7 @@ Crafty.e("ban2").attr({x:450, y: 523, w: 100, h: 17, matter : fondomater})
 	var vol = (pairs[0].bodyA.speed / 60)
 	if(vol < 0.05)return
 	if(vol > 1)vol = 1
-	if(vol < 0.21)return Crafty.audio.play("golpe2",1,(vol * 2.5))
+	if(vol < 0.22)return Crafty.audio.play("golpe2",1,(vol * 2.5))
 		return Crafty.audio.play("golpe",1,vol)
 		}
 	
