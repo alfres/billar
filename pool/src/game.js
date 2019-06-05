@@ -203,7 +203,7 @@ function getfactor(dx,dy){
 	
 
 function disparo(){  
- // sendip(); setold();  gatillo.blur();
+ sendip(); gatillo.blur();
 var bod = Crafty('bola16')._body ,  p = Crafty('puntero') 
 var  rayx = 0, rayy = 0, rayx2, rayy2, multiplicador = 5, fa
 
