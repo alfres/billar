@@ -97,6 +97,18 @@ Crafty.e("ban").attr({x: -110, y: 0, w: 140, h: 540 })
  Events.on(Crafty.Matter.engine, 'collisionStart', function(event) {
     if(arranque == false) {return}
      var pairs = event.pairs;
+	 
+	 if(pairs[0].bodyB.id < 4){
+	var vol = (pairs[0].bodyA.speed / 60)
+	console.log("play volume " + vol);
+	
+	if(vol > 0.04){
+	if(vol > 1){vol = 1}
+	if(vol < 0.32){ Crafty.audio.play("golpe2",1,(vol * 2))
+		}else { Crafty.audio.play("golpe",1,vol)}
+		 
+	}
+		}
     
      // console.log("colision between " + pairs[0].bodyA.id + " - " + pairs[0].bodyB.id);
 	 if(pairs[0].bodyA.id ==1 && pairs[0].bodyB.id ==3) {
