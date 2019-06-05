@@ -100,7 +100,7 @@ Crafty.e("ban").attr({x: -110, y: 0, w: 140, h: 540 })
 	 
 	 if(pairs[0].bodyB.id < 4){
 	var vol = (pairs[0].bodyA.speed / 60)
-	console.log("play volume " + vol);
+	//console.log("play volume " + vol);
 	
 	if(vol > 0.04){
 	if(vol > 1){vol = 1}
