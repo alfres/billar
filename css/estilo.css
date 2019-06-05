@@ -73,6 +73,20 @@ height: 37px;
 
 
 }
+
+#st3{
+background-color : white ;
+border: 3px solid black;
+font-size: 20px; 
+width: 192px;  
+height: 37px; 
+
+
+}
+#st3:hover {
+  background-color: yellow;
+}
+
 .afino{border-radius: 15px;
 	line-height: 5px;
 	border: 3px solid black;
