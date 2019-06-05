@@ -40,7 +40,7 @@ ctx.stroke();
 Crafty.c('bol', {
 	init: function( ) {
 
-		this.requires("2D, DOM,  Matter, Mouse, Draggable, MouseDrag");
+		this.requires("2D, DOM,  Matter");
 this.quieto = true;
 this.origin("center")
 this.touche = false;
