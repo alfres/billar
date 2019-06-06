@@ -106,7 +106,7 @@ Crafty.Matter.init({
 		Crafty("puntero").attr({x: event.clientX -6, y: event.clientY -6, z: 100, w: 1, h: 1})
 		Crafty('can').destroy()	
         Crafty.e('can')
-		//alert("clientX: " + event.clientX + " - clientY: " + event.clientY)
+		// alert("clientX: " + event.clientX + " - clientY: " + event.clientY)
 		})
 		
 		 
@@ -162,7 +162,7 @@ var tar = []
 if(activeplayer == 0){activeplayer = 1; pasiveplayer = 0; ser.style.backgroundColor = '#ffff4d'
 } else{activeplayer = 0; pasiveplayer = 1; ser.style.backgroundColor = '#ff8080'}
 ser.textContent = 'JUEGA ' + players[activeplayer].nombre + ' ' + players[activeplayer].target;
- Crafty.audio.play("mal",1,0.3);
+if(son.checked == true) Crafty.audio.play("mal",1,0.3);
 }
 
 
@@ -203,7 +203,7 @@ function getfactor(dx,dy){
 	
 
 function disparo(){  
- sendip(); gatillo.blur();
+ // sendip(); setold();  gatillo.blur();
 var bod = Crafty('bola16')._body ,  p = Crafty('puntero') 
 var  rayx = 0, rayy = 0, rayx2, rayy2, multiplicador = 5, fa
 
@@ -219,9 +219,9 @@ fa = getfactor(dif(bod.position.x, p.x ),dif(bod.position.y, p.y ))
  rayx2 = b.value * fa   * (rayx) * dif(bod.position.x, p.x ) * multiplicador
  rayy2 = b.value * fa   * (rayy) * dif(bod.position.y, p.y ) * multiplicador
 
-	//console.log('posx____' + bod.position.x +'_____posy   ' + bod.position.y );
-	//console.log('punterox____' + p.x +'_____punteroy   ' + p.y );
-    //console.log('rayx____' + rayx2 +'_____nrayy   ' + rayy2 + '______factor ' + '______' + fa);
+	// console.log('posx____' + bod.position.x +'_____posy   ' + bod.position.y );
+	// console.log('punterox____' + p.x +'_____punteroy   ' + p.y );
+    // console.log('rayx____' + rayx2 +'_____nrayy   ' + rayy2 + '______factor ' + '______' + fa);
 
   Body.applyForce( bod, { x: bod.position.x , y: bod.position.y}, { x: rayx2, y: rayy2} )
   

@@ -203,10 +203,10 @@ Crafty.e("ban2").attr({x:450, y: 523, w: 100, h: 17, matter : fondomater})
   
 // Events.on(Crafty.Matter.engine, "afterUpdate", function(event) {if(arranque2 == true){alert('up'); arranque = true}})
   
- Events.on(Crafty.Matter.engine, 'collisionStart', function(event) {
+ Events.on(Crafty.Matter.engine, 'collisionStart', function(event) {if(son.checked == false) {return}
     if(arranque == false) {return}
      var pairs = event.pairs;
-  // console.log("colision between " + pairs[0].bodyA.id + " - " + pairs[0].bodyB.id);
+   // console.log("colision between " + pairs[0].bodyA.id + " - " + pairs[0].bodyB.id);
    
    // if(nueva == false && pairs[0].bodyB.id < 16){
 		// nueva = true; 
@@ -214,7 +214,7 @@ Crafty.e("ban2").attr({x:450, y: 523, w: 100, h: 17, matter : fondomater})
 		// }
 	
 	if(pairs[0].bodyB.id < 17){
-		//console.log("play volume " + (pairs[0].bodyA.speed / 60));
+		// console.log("play volume " + (pairs[0].bodyA.speed / 60));
 	var vol = (pairs[0].bodyA.speed / 60)
 	if(vol < 0.05)return
 	if(vol > 1)vol = 1
@@ -266,7 +266,7 @@ if(thi.within(920,462, 47, 52)) { dentro(b)}
 }
 
 function dentro(thi){
-	Crafty.audio.play("pocket");
+if(son.checked == true) 	Crafty.audio.play("pocket");
 	if(thi.num < 16)pintar('img/ball_' + thi.num + '.png')
 		Matter.Body.setPosition(thi._body, {x : thi.origen['origenx'] + 1000, y: thi.origen['origeny'] + 1000 })	
 Matter.Body.setVelocity(thi._body, {x: 0, y: 0})
