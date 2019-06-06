@@ -6,17 +6,28 @@ Crafty.c('can', {
 		this.attr({x: 0, y: 0, w: 1000, h: 540});
 		this.bind("Draw", function(Data) { 
 		var ctx = Data.ctx
-		ctx.lineWidth = 0.5;
-		/*ctx.beginPath();
-ctx.arc(Crafty('bola1')._body.position.x, Crafty('bola1')._body.position.y, 300, 0, Math.PI*2); 
+		ctx.lineWidth = 35;
+		ctx.strokeStyle = "#669900";
+		ctx.fillStyle = "#669900";
+		ctx.beginPath();
+ctx.arc(Crafty('puntero').x, Crafty('puntero').y, 18, 0, Math.PI*2); 
 ctx.closePath();
-ctx.stroke();
-*/
+ctx.fill();
+
 ctx.beginPath();
 ctx.moveTo(Crafty('bola1')._body.position.x , Crafty('bola1')._body.position.y);
 ctx.lineTo(Crafty('puntero').x , Crafty('puntero').y );
 ctx.stroke(); 
-        
+
+ctx.lineWidth = 0.5;
+		ctx.strokeStyle = "black";
+ ctx.beginPath();
+ctx.moveTo(Crafty('bola1')._body.position.x , Crafty('bola1')._body.position.y);
+ctx.lineTo(Crafty('puntero').x , Crafty('puntero').y );
+ctx.stroke();  
+
+
+
 		
 		});
 		

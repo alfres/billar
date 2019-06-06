@@ -150,9 +150,9 @@ fa = getfactor(dif(bod.position.x, p.x ),dif(bod.position.y, p.y ))
  rayx2 = b.value * fa   * (rayx) * dif(bod.position.x, p.x ) * multiplicador
  rayy2 = b.value * fa   * (rayy) * dif(bod.position.y, p.y ) * multiplicador
 
-	//console.log('posx____' + bod.position.x +'_____posy   ' + bod.position.y );
-	//console.log('punterox____' + p.x +'_____punteroy   ' + p.y );
-   // console.log('rayx____' + rayx2 +'_____nrayy   ' + rayy2 + '______factor ' + '______' + fa);
+	// console.log('posx____' + bod.position.x +'_____posy   ' + bod.position.y );
+	// console.log('punterox____' + p.x +'_____punteroy   ' + p.y );
+    // console.log('rayx____' + rayx2 +'_____nrayy   ' + rayy2 + '______factor ' + '______' + fa);
 
 		    Body.applyForce( bod,
     { x: bod.position.x , y: bod.position.y},
@@ -223,7 +223,7 @@ function duermen(){
 }
 
 function beep() {
-    Crafty.audio.play("mal",1,0.3);
+ if(son.checked == true)   Crafty.audio.play("mal",1,0.3);
 }
 
 function chekcar(){if(modo == 0){

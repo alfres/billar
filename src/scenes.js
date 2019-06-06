@@ -29,6 +29,16 @@ Crafty.defineScene("portada", function() {
 	gob.style.visibility =  'hidden'
 	st.style.backgroundColor = '#993300'
 power()
+
+Crafty.e("2D, DOM, fondo, Mouse")
+ .attr({x: 0, y: 0, z: -100, w: 1000, h: 540})
+ .bind("MouseDown", function(event) {
+		Crafty("puntero").attr({x: event.clientX -6, y: event.clientY -6, z: 100, w: 1, h: 1})
+		Crafty('can').destroy()	
+        Crafty.e('can')
+		// alert("clientX: " + event.clientX + " - clientY: " + event.clientY)
+		})
+
 Crafty.e("2D, DOM,  Color, puntero")
  .attr({x: 503.00, y: 20, z: 100, w: 1, h: 1})
  .color("white").origin("center")	
@@ -98,13 +108,13 @@ Crafty.e("ban").attr({x: -110, y: 0, w: 140, h: 540 })
     if(arranque == false) {return}
      var pairs = event.pairs;
 	 
-	 if(pairs[0].bodyB.id < 4){
+	 if(pairs[0].bodyB.id < 4 && son.checked == true){
 	var vol = (pairs[0].bodyA.speed / 60)
-	//console.log("play volume " + vol);
+	// console.log("play volume " + vol);
 	
 	if(vol > 0.04){
 	if(vol > 1){vol = 1}
-	if(vol < 0.32){ Crafty.audio.play("golpe2",1,(vol * 2))
+	if(vol < 0.32 ){ Crafty.audio.play("golpe2",1,(vol * 2))
 		}else { Crafty.audio.play("golpe",1,vol)}
 		 
 	}
