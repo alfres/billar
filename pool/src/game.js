@@ -5,34 +5,8 @@ var players= [{nombre:'PEPE', target: 0 }, {nombre:'PACO', target: 0}]
  var old1, old2,old3, oldforce
  var entrantes = []
 
- var  Engine = Matter.Engine,
-       Events = Matter.Events,
-        Constraint = Matter.Constraint,
-        MouseConstraint = Matter.MouseConstraint,
-Mouse = Matter.Mouse,
-   Render = Matter.Render,
-Runner = Matter.Runner,
-  World = Matter.World,
-  Bodies = Matter.Bodies,
-  Body = Matter.Body;
 
-
- 
-  function power(){
- lb2.textContent = 'force ' + b.value
- lc2.textContent = 'torque ' + c.value
-}
- 
- function reseting(){
-	 
-
-b.value = 50
-c.value = 0
-
-power()
-	 
- }
- function reseting2(){
+function reseting2(){
 	 fin = false
 	nueva = false
 	
@@ -44,39 +18,13 @@ power()
 	reseting()
  }
  
-function sendip(){
-var dato = new FormData();
-dato.append("modo" , modo);
-dato.append("serie" , serie);
 
-var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Microsoft.XMLHTTP");
- xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4) {
-      //console.log(xhr.response);
-	  //alert(xhr.response)
-    }
-  }
-xhr.open( 'post', 'https://tekintools.com/lingo/action_page2.php', true );
-xhr.send(dato);	
-} 
-
- 
-
-Game = {
+ Game = {
 	
- load:function(){
+ load:function(){ iniciarcrafty()
  
-  Crafty.init(1000,540, document.getElementById('marco'));
-  //Crafty.canvas.init()
-  Crafty.background('green') 
-Crafty.Matter.init({
-	debug : false,
-	gravity : {
-		x : 0,
-		y : 0
-	}
-});
-  Crafty.sprite("img/table.png", {table:[0,0,4551,2570]});
+
+  Crafty.sprite("img/table.png", {table:[0,0,1000,565]});
   
   Crafty.sprite("img/ball_1.png", {bo1:[0,0,141,141]});
   Crafty.sprite("img/ball_2.png", {bo2:[0,0,141,141]});
@@ -95,19 +43,12 @@ Crafty.Matter.init({
   Crafty.sprite("img/ball_15.png", {bo15:[0,0,141,141]});
   Crafty.sprite("img/ball_16.png", {bo16:[0,0,64,64]});
   
-   Crafty.audio.add("breack", "sounds/Break+2.mp3");
+   
    Crafty.audio.add("pocket", "sounds/pocket.mp3");
-   Crafty.audio.add("mal", "sounds/mal.mp3");
-   Crafty.audio.add("golpe", "sounds/golpe.mp3");
-   Crafty.audio.add("golpe2", "sounds/golpe2.mp3");
+  
  
  Crafty.e("2D, DOM, table, Persist, Mouse").attr({x: 0, y: 0, w: 1000, h: 540})
-.bind("MouseDown", function(event) {
-		Crafty("puntero").attr({x: event.clientX -6, y: event.clientY -6, z: 100, w: 1, h: 1})
-		Crafty('can').destroy()	
-        Crafty.e('can')
-		// alert("clientX: " + event.clientX + " - clientY: " + event.clientY)
-		})
+.bind("MouseDown", function(event) { picar(event)})
 		
 		 
   Crafty.scene("portada")
@@ -116,45 +57,19 @@ prev()
 }
 }
 
-function prev(){Crafty('can').destroy()
-document.getElementById('starting').style.display = 'inline-block'
-	document.getElementById('botones').style.display = 'none'
-	Crafty("bol").each(function(i) { this.visible = false
-	// Matter.Body.setPosition(this._body, {x : this.origen['origenx'], y: this.origen['origeny']})	
-	
-	
-	})
-	arranque = false; 
-}
+
 
 function por(){if(mode.value == 0){return window.location = "../index.html"}
 
-	document.getElementById('starting').style.display = 'none'
-	document.getElementById('botones').style.display = 'inline-block'
-	gatillo.style.visibility =  'visible'
-	// gob.style.visibility =  'hidden'
-	st.style.backgroundColor = '#993300'
-     hideballs()
-	 // Crafty.scene("portada")
+	porcomun()
+	hideballs()
+
 	Crafty("bol").each(function(i) { this.fuera = false; this.quieto = true;
-	Matter.Body.setVelocity(this._body, {x: 0, y: 0})
-				Body.setAngularVelocity( this._body ,0)
-	Matter.Body.setPosition(this._body, {x : this.origen['origenx'], y: this.origen['origeny']})	
-	
-	this.visible = true			
 	this.old = {oldx: this._body.position.x, oldy: this._body.position.y}		
 	
 	})
-	
-// Crafty("bol").each(function(i) { this.old = {oldx: this._body.position.x, oldy: this._body.position.y}})
 
-
-	Crafty('puntero').x = Crafty('puntero').origen['origenx']; 
-	Crafty('puntero').y = Crafty('puntero').origen['origeny'];
 	
-	rayo()
-	nueva = false
-	reseting2()
 }
 
 function changeplayer(){ 
@@ -166,101 +81,9 @@ if(son.checked == true) Crafty.audio.play("mal",1,0.3);
 }
 
 
-function setold(){
-	
-	
-	old1 = {x: Crafty('bola16')._body.position.x, y: Crafty('bola16')._body.position.y}; 
-	 old2 = {x: Crafty('bola8')._body.position.x, y: Crafty('bola8')._body.position.y}; 
-	// old3 = {x: Crafty('bola3')._body.position.x, y: Crafty('bola3')._body.position.y}; 
-	oldforce = {force: b.value, efectx: c.value};
-}
-
-function goback(){
-	Matter.Body.setPosition(Crafty('bola16')._body, {x : old1.x, y: old1.y})
-	 Matter.Body.setPosition(Crafty('bola8')._body, {x : old2.x, y: old2.y})
-	// Matter.Body.setPosition(Crafty('bola3')._body, {x : old3.x, y: old3.y})
-	b.value = oldforce.force
-	c.value = oldforce.efectx
-	
-	rayo()
-	power()
-	gob.style.visibility = 'hidden';
-	st.style.visibility = 'hidden';
-	gatillo.style.visibility = 'visible';
-	serie = 0
-	ser.textContent = 'serie ' + serie;
-}
-
-function getfactor(dx,dy){
-	var	factor =  0.0012
-	var	factor2 =  97
-	var hipo = (Math.hypot(dx,dy) / factor2)
-	// alert(hipo)
-		var facto =  factor / hipo 	
-	return facto
-}
-
-	
-
-function disparo(){  
- // sendip(); setold();  gatillo.blur();
-var bod = Crafty('bola16')._body ,  p = Crafty('puntero') 
-var  rayx = 0, rayy = 0, rayx2, rayy2, multiplicador = 5, fa
-
-entrantes = []	
-	       if (p.x <  bod.position.x && p.y <   bod.position.y){ rayx = -1;  rayy = -1 
-	} else if (p.x >= bod.position.x && p.y <   bod.position.y){ rayx = 1;  rayy = -1 
-	} else if (p.x >= bod.position.x && p.y >=  bod.position.y){ rayx = 1;  rayy = 1 
-    } else if (p.x <  bod.position.x && p.y >=  bod.position.y){ rayx = -1; rayy = 1 
-    }
-	
-fa = getfactor(dif(bod.position.x, p.x ),dif(bod.position.y, p.y ))
-
- rayx2 = b.value * fa   * (rayx) * dif(bod.position.x, p.x ) * multiplicador
- rayy2 = b.value * fa   * (rayy) * dif(bod.position.y, p.y ) * multiplicador
-
-	// console.log('posx____' + bod.position.x +'_____posy   ' + bod.position.y );
-	// console.log('punterox____' + p.x +'_____punteroy   ' + p.y );
-    // console.log('rayx____' + rayx2 +'_____nrayy   ' + rayy2 + '______factor ' + '______' + fa);
-
-  Body.applyForce( bod, { x: bod.position.x , y: bod.position.y}, { x: rayx2, y: rayy2} )
-  
-  Body.setAngularVelocity( bod, parseInt(c.value)  * parseInt(b.value) / 2000)
-  gatillo.style.visibility =  'hidden'
-  st.style.visibility =  'hidden'
-  arranque = true;
- Crafty('can').destroy()
- 
-}
-
-function  dif(bo, pu){ return (Math.max(bo, pu) - Math.min(bo, pu)) }
 
 
-function  pintar(cosa){
-	var newNode 
 
-newNode = document.createElement("img");
-newNode.id = 'toque' 
-newNode.src = cosa 
-newNode.classList.add("fila")
-newNode.style.width = '20px'
-document.getElementById('botones').appendChild(newNode);
-	
-}
-
-function  hideballs(){
-	elementList = document.getElementById('botones').querySelectorAll(".fila");
-	if(elementList.length < 1) return
-	elementList.forEach(function(element) {
-  document.getElementById('botones').removeChild(element);
-});
-
-}
-
-function  bajar1b(){ b.value = b.value - 1; power() ;  rayo()}
-function  subir1b(){ b.value = parseInt(b.value) + 1; power() ;  rayo()}
-	
-function  rayo(){ Crafty('can').destroy(); Crafty.e('can') }
 
 function duermen(){
 	var contador = true
@@ -268,12 +91,9 @@ function duermen(){
 	Crafty("bol").each(function(i) {this.quieto = false})	
 		
 		if(contador == true){
-			Crafty("bol").each(function(i) {
-				Matter.Body.setVelocity(this._body, {x: 0, y: 0})
-				Body.setAngularVelocity( this._body ,0)
-				})
-	
-	timer5 = setTimeout(function(){ st.style.visibility = 'visible'
+			pararbolas()
+			
+		timer5 = setTimeout(function(){ st.style.visibility = 'visible'
 		clearTimeout(timer5);
 		// hideballs()
 		if(fin == true){return}

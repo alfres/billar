@@ -6,11 +6,11 @@
 <title>POOL</title>
 <link rel="icon" href="img/ball_8.png">
 <link rel="stylesheet" href="css/estilo.css">
-
+<link rel="stylesheet" href="../css/estilocomun.css">
  <script type="text/javascript" src="../src/crafty-min.js"></script>
  <script src="../src/core/matter (2).js"></script>
  <script type="text/javascript" src="../src/craftymatter.js"></script>
-  
+  <script type="text/javascript" src="../src/commonfunctions.js"></script>
   <script type="text/javascript" src="src/game.js"></script>
   <script type="text/javascript" src="src/components.js"></script>
   <script type="text/javascript" src="src/scenes.js"></script>
@@ -26,8 +26,8 @@
 
 <div id='botones'  style=' display:none; width: 1000px;' onmouseenter='Crafty("can").visible = false' >
 
-<button  id="gatillo" onclick='disparo()' onmouseenter='Crafty("can").visible = true'>SHOT</button>
-<!-- <button id="gob" onclick='goback()' >GO BACK</button> -->
+<button  id="gatillo" onclick='entrantes = []; disparo(16)' onmouseenter='Crafty("can").visible = true'>SHOT</button>
+
 
 <div id='ser' style='display: inline-block;   text-align: center;'  ></div>
 <button id="st"  onclick='prev()' >RESTART</button><br>

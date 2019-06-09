@@ -1,50 +1,5 @@
-var fondomater = {
-	  
-	  isSleeping: true,
-	  isSensor: true,
-			restitution : 0.01,
-			friction: 0.5,
-			frictionAir: 1,
-			frictionStatic: 1,
-			density: 0.7,
-			collisionFilter: {group: 0, category: 1}
-		}
-
-
-
-
-
-var banmater = {
-	  
-	  isSleeping: true,
-	  isSensor: true,
-			restitution : 0.9,
-			friction: 0.5,
-			frictionAir: 1,
-			frictionStatic: 1,
-			density: 0.7,
-			collisionFilter: {group: 0, category: 1}
-		}
-		
-		var bolmater = {esbola: true,
-			slop: 0.05,
-			restitution : 0.5,
-			friction: 0.03,
-			frictionAir: 0.01,
-			frictionStatic: 0.021,
-			shape : 'circle',
-		density: 0.7,
-			collisionFilter: {group: 1}
-		}
-
-
-
 Crafty.defineScene("portada", function() {
-	// document.getElementById('starting').style.display = 'none'
-	// document.getElementById('botones').style.display = 'inline-block'
-	// gatillo.style.visibility =  'visible'
-	// gob.style.visibility =  'hidden'
-	 // st.style.visibility =  'hidden'
+	
  power()
 Crafty.e("2D, DOM,  Color, puntero")
  .attr({x: 950.00, y: 240, z: 100, w: 1, h: 1})
@@ -139,7 +94,7 @@ Crafty.e("bol, bo" + n + ", bola" + n)
   })
 .num = n;
 
-// Matter.Body.setPosition(vola._body, {x : myx, y: myy  })	
+
 }
 
 	Crafty("bol").each(function(i) { 
@@ -201,17 +156,14 @@ Crafty.e("ban2").attr({x:450, y: 523, w: 100, h: 17, matter : fondomater})
 
 
   
-// Events.on(Crafty.Matter.engine, "afterUpdate", function(event) {if(arranque2 == true){alert('up'); arranque = true}})
+//
   
  Events.on(Crafty.Matter.engine, 'collisionStart', function(event) {if(son.checked == false) {return}
     if(arranque == false) {return}
      var pairs = event.pairs;
    // console.log("colision between " + pairs[0].bodyA.id + " - " + pairs[0].bodyB.id);
    
-   // if(nueva == false && pairs[0].bodyB.id < 16){
-		// nueva = true; 
-		// return Crafty.audio.play("breack",1,pairs[0].bodyA.speed / 200)
-		// }
+
 	
 	if(pairs[0].bodyB.id < 17){
 		// console.log("play volume " + (pairs[0].bodyA.speed / 60));
@@ -222,22 +174,7 @@ Crafty.e("ban2").attr({x:450, y: 523, w: 100, h: 17, matter : fondomater})
 		return Crafty.audio.play("golpe",1,vol)
 		}
 	
-	// alert(pairs[0].bodyB.esbola)
-    
-	 // if(pairs[0].bodyA.id ==1 && pairs[0].bodyB.id ==3) {
-		 // if(Crafty('bola3').touche == true ) {return}
-		 // pintar('img/Billiard_Balls_01_Yellow_64x64.png')
-		 // Crafty('bola3').touche = true
-		 // } else if(pairs[0].bodyA.id ==1 && pairs[0].bodyB.id ==2){
-			// if(Crafty('bola2').touche == true ) {return}
-			// pintar('img/Billiard_Balls_01_Red_64x64.png')
-			 // Crafty('bola2').touche = true
-		 // } else if(pairs[0].bodyA.id ==1 && pairs[0].bodyB.id > 3){
-			 // if(modo == 0) {return}
-			 // if(Crafty('bola3').touche == true && Crafty('bola2').touche == true) {return}
-			 // if(cuentabandas > 2) {return}
-			 // pintar('img/3bandas.png')
-			 // cuentabandas += 1}
+	
 });
 
 Matter.Resolver._restingThresh = 0.1;
@@ -267,7 +204,7 @@ if(thi.within(920,462, 47, 52)) { dentro(b)}
 
 function dentro(thi){
 if(son.checked == true) 	Crafty.audio.play("pocket");
-	if(thi.num < 16)pintar('img/ball_' + thi.num + '.png')
+	if(thi.num < 16)pintar('img/ball_' + thi.num + '.png', '20px')
 		Matter.Body.setPosition(thi._body, {x : thi.origen['origenx'] + 1000, y: thi.origen['origeny'] + 1000 })	
 Matter.Body.setVelocity(thi._body, {x: 0, y: 0})
 Body.setAngularVelocity( thi._body ,0)
@@ -287,7 +224,7 @@ thi.quieto = true;
 }
 
 function checkbola(thi){ 
-// if((thi._body.speed.toFixed(1) * 100) < 10){alert(thi._body.speed.toFixed(1) * 100)
+
 if(thi.old['oldx'] == (thi._body.position.x.toFixed()) && thi.old['oldy'] == (thi._body.position.y.toFixed(1))){
 thi.quieto = true
 } else{
