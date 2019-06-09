@@ -54,7 +54,7 @@ Crafty.c('ban', {
 
 		this.requires("2D, DOM, Color,   Mouse")
 		this.color("#661a00")
-	   
+	   this.bind("MouseDown", function(event) { picar(event)})
 }
 })
 
@@ -63,12 +63,7 @@ Crafty.c('ban2', {
 
 		this.requires("2D, DOM, Color, Matter, Mouse")
 		this.color("#004d00")
-	    this.bind("Click", function(event) {
-		Crafty("puntero").attr({x: event.clientX -6, y: event.clientY -6, z: 100, w: 1, h: 1})
-		Crafty('can').destroy()	
-        Crafty.e('can')
-		//alert("clientX: " + event.clientX + " - clientY: " + event.clientY)
-		})
+	    this.bind("MouseDown", function(event) { picar(event)})
 }
 })
 

@@ -1,51 +1,19 @@
-var banmater = {
-	  
-	  isSleeping: true,
-	  isSensor: true,
-			restitution : 0.9,
-			friction: 0.5,
-			frictionAir: 1,
-			frictionStatic: 1,
-			density: 0.7,
-			collisionFilter: {group: 0, category: 1}
-		}
-		
-		var bolmater = {
-			slop: 0.1,
-			restitution : 0.5,
-			friction: 0.001,
-			frictionAir: 0.01,
-			frictionStatic: 0.021,
-			shape : 'circle',
-		density: 0.7,
-			collisionFilter: {group: 1}
-		}
-
-
 Crafty.defineScene("portada", function() {
-	document.getElementById('starting').style.display = 'none'
-	document.getElementById('botones').style.display = 'inline-block'
-	gatillo.style.visibility =  'visible'
-	gob.style.visibility =  'hidden'
-	st.style.backgroundColor = '#993300'
-power()
+
 
 Crafty.e("2D, DOM, fondo, Mouse")
  .attr({x: 0, y: 0, z: -100, w: 1000, h: 540})
- .bind("MouseDown", function(event) {
-		Crafty("puntero").attr({x: event.clientX -6, y: event.clientY -6, z: 100, w: 1, h: 1})
-		Crafty('can').destroy()	
-        Crafty.e('can')
-		// alert("clientX: " + event.clientX + " - clientY: " + event.clientY)
-		})
+.bind("MouseDown", function(event) { picar(event)})
 
 Crafty.e("2D, DOM,  Color, puntero")
- .attr({x: 503.00, y: 20, z: 100, w: 1, h: 1})
+ .attr({x: 525.00, y: 20, z: 100, w: 1, h: 1})
+ .attr({origen: {origenx: 525.00, origeny: 20} })
  .color("white").origin("center")	
  
  //bolas 
- Crafty.e("bol, bo,  bola1").attr({x: 1485.00, y: 1345.00, w: 35, h: 35,  matter : bolmater})
+ Crafty.e("bol, bo,  bola1").attr({x: 70.111111111111111, y: 345.111111111111111, w: 35, h: 35,  matter : bolmater})
 .attr({old: {oldx:this.x, oldy:this.y} })
+.attr({origen: {origenx: 70.111111111111111, origeny: 345.111111111111111} })
 .bind("EnterFrame", function() { if(arranque == false) return
 if(this.old['oldx'] == (this.x.toFixed(1)) && this.old['oldy'] == (this.y.toFixed(1))){
 this.quieto = true
@@ -60,8 +28,8 @@ if(duermen()) { arranque = false}
 })
  
  
- Crafty.e("bol,bo2,bola2").attr({x: 295, y: 250, w: 35, h: 35,  matter : bolmater})  
- 
+ Crafty.e("bol,bo2,bola2").attr({x: 295.111111111111111, y: 250.111111111111111, w: 35, h: 35,  matter : bolmater})  
+ .attr({origen: {origenx: 295.111111111111111, origeny: 250.111111111111111} })
  .attr({old: {oldx:this.x, oldy:this.y} })
 .bind("EnterFrame", function() { 
 if(this.old['oldx'] == (this.x.toFixed(1)) && this.old['oldy'] == (this.y.toFixed(1))){
@@ -75,8 +43,8 @@ this.quieto = true
 })
  
  Crafty.e("bol,bo3,bola3")
- .attr({x: 555, y: 150, w: 35, h: 35,  matter : bolmater})
-
+ .attr({x: 555.111111111111111, y: 150.111111111111111, w: 35, h: 35,  matter : bolmater})
+.attr({origen: {origenx: 555.111111111111111, origeny: 150.111111111111111} })
 .attr({old: {oldx:this.x, oldy:this.y} })
 .bind("EnterFrame", function() { 
 if(this.old['oldx'] == (this.x.toFixed(1)) && this.old['oldy'] == (this.y.toFixed(1))){
@@ -123,17 +91,17 @@ Crafty.e("ban").attr({x: -110, y: 0, w: 140, h: 540 })
      // console.log("colision between " + pairs[0].bodyA.id + " - " + pairs[0].bodyB.id);
 	 if(pairs[0].bodyA.id ==1 && pairs[0].bodyB.id ==3) {
 		 if(Crafty('bola3').touche == true ) {return}
-		 pintar('img/Billiard_Balls_01_Yellow_64x64.png')
+		 pintar('img/Billiard_Balls_01_Yellow_64x64.png', '15px')
 		 Crafty('bola3').touche = true
 		 } else if(pairs[0].bodyA.id ==1 && pairs[0].bodyB.id ==2){
 			if(Crafty('bola2').touche == true ) {return}
-			pintar('img/Billiard_Balls_01_Red_64x64.png')
+			pintar('img/Billiard_Balls_01_Red_64x64.png', '15px')
 			 Crafty('bola2').touche = true
 		 } else if(pairs[0].bodyA.id ==1 && pairs[0].bodyB.id > 3){
 			 if(modo == 0) {return}
 			 if(Crafty('bola3').touche == true && Crafty('bola2').touche == true) {return}
 			 if(cuentabandas > 2) {return}
-			 pintar('img/3bandas.png')
+			 pintar('img/3bandas.png', '15px')
 			 cuentabandas += 1}
 });
 
