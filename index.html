@@ -6,7 +6,7 @@
 <title>billar</title>
 <link rel="icon" href="img/Billiard_Balls_01_Red_64x64.png">
 <link rel="stylesheet" href="css/estilo.css">
-
+<link rel="stylesheet" href="css/estilocomun.css">
  <script type="text/javascript" src="src/crafty-min.js"></script>
  <script src="src/core/matter (2).js"></script>
  <script type="text/javascript" src="src/craftymatter.js"></script>
@@ -14,6 +14,7 @@
   <script type="text/javascript" src="src/game.js"></script>
   <script type="text/javascript" src="src/components.js"></script>
   <script type="text/javascript" src="src/scenes.js"></script>
+  <script type="text/javascript" src="src/commonfunctions.js"></script>
  <script> window.onload = Game.load </script>
 
 </head>
@@ -25,7 +26,7 @@
 
 <div id='botones' style=' display:none; width: 1000px;'  >
 
-<button id="gatillo" onclick='disparo()' >SHOT</button>
+<button id="gatillo" onclick='setold();hideballs(); disparo(1)' >SHOT</button>
 <button id="gob" onclick='goback()' >GO BACK</button>
 <button id="st"  onclick='prev()' >RESTART</button>
 <label id="lb2" for="b" >force 80</label>
