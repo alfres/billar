@@ -1,5 +1,5 @@
  var cuentabandas = 0, modo = 0 ,   arranque = false, serie = 0
- var old1, old2,old3, oldforce
+ var old1, old2,old3, oldforce, oldpuntero
 
 
  
@@ -40,6 +40,7 @@ function setold(){
 	old2 = {x: Crafty('bola2')._body.position.x, y: Crafty('bola2')._body.position.y}; 
 	old3 = {x: Crafty('bola3')._body.position.x, y: Crafty('bola3')._body.position.y}; 
 	oldforce = {force: b.value, efectx: c.value};
+	oldpuntero = {punx: Crafty("puntero").x, puny: Crafty("puntero").y};
 }
 
 function goback(){
@@ -48,7 +49,7 @@ function goback(){
 	Matter.Body.setPosition(Crafty('bola3')._body, {x : old3.x, y: old3.y})
 	b.value = oldforce.force
 	c.value = oldforce.efectx
-	
+	Crafty("puntero").x = oldpuntero.punx ;  Crafty("puntero").y = oldpuntero.puny
 	rayo()
 	power()
 	gob.style.visibility = 'hidden';

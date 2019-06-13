@@ -15,14 +15,7 @@ Crafty.e("2D, DOM,  Color, puntero")
 .attr({old: {oldx:this.x, oldy:this.y} })
 .attr({origen: {origenx: 70.111111111111111, origeny: 345.111111111111111} })
 .bind("EnterFrame", function() { if(arranque == false) return
-if(this.old['oldx'] == (this.x.toFixed(1)) && this.old['oldy'] == (this.y.toFixed(1))){
-this.quieto = true
-} else{
-	this.old['oldx'] = this.x.toFixed(1)
-	this.old['oldy'] = this.y.toFixed(1)
-	this.quieto = false
-	
-}
+checkbola(this)
 
 if(duermen()) { arranque = false}
 })
@@ -31,30 +24,16 @@ if(duermen()) { arranque = false}
  Crafty.e("bol,bo2,bola2").attr({x: 295.111111111111111, y: 250.111111111111111, w: 35, h: 35,  matter : bolmater})  
  .attr({origen: {origenx: 295.111111111111111, origeny: 250.111111111111111} })
  .attr({old: {oldx:this.x, oldy:this.y} })
-.bind("EnterFrame", function() { 
-if(this.old['oldx'] == (this.x.toFixed(1)) && this.old['oldy'] == (this.y.toFixed(1))){
-this.quieto = true
-} else{
-	this.old['oldx'] = this.x.toFixed(1)
-	this.old['oldy'] = this.y.toFixed(1)
-	this.quieto = false
-	
-}
+.bind("EnterFrame", function() { if(arranque == false) return;
+checkbola(this)
 })
  
  Crafty.e("bol,bo3,bola3")
  .attr({x: 555.111111111111111, y: 150.111111111111111, w: 35, h: 35,  matter : bolmater})
 .attr({origen: {origenx: 555.111111111111111, origeny: 150.111111111111111} })
 .attr({old: {oldx:this.x, oldy:this.y} })
-.bind("EnterFrame", function() { 
-if(this.old['oldx'] == (this.x.toFixed(1)) && this.old['oldy'] == (this.y.toFixed(1))){
-this.quieto = true
-} else{
-	this.old['oldx'] = this.x.toFixed(1)
-	this.old['oldy'] = this.y.toFixed(1)
-	this.quieto = false
-	
-}
+.bind("EnterFrame", function() { if(arranque == false) return;
+checkbola(this)
 })
 	
  

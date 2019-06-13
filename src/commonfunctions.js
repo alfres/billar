@@ -133,7 +133,7 @@ return (Math.max(bo, pu) - Math.min(bo, pu))
 	}
 	
 	function disparo(n){  
- sendip();
+ // sendip();
    gatillo.blur();
 var bod = Crafty('bola' + n)._body ,  p = Crafty('puntero') 
 var  rayx = 0, rayy = 0, rayx2, rayy2, multiplicador = 5, fa
@@ -209,4 +209,18 @@ function  picar(event){
 Crafty("puntero").attr({x: event.clientX -6, y: event.clientY -6, z: 100, w: 1, h: 1})
 		Crafty('can').destroy()	
         Crafty.e('can') 
+}
+
+function checkbola(thi){ 
+
+if(thi.old['oldx'] == (thi._body.position.x.toFixed()) && thi.old['oldy'] == (thi._body.position.y.toFixed(1))){
+thi.quieto = true
+} else{
+	thi.old['oldx'] = thi._body.position.x.toFixed()
+	thi.old['oldy'] = thi._body.position.y.toFixed(1)
+	thi.quieto = false
+	
+}
+
+
 }
