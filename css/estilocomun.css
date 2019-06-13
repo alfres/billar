@@ -88,7 +88,7 @@ background-color : #ddff99 ;
   
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: none;
   border-radius: 4px;
-  box-sizing: border-box;
+  background-color: #f1f1f1;
 }
