@@ -82,3 +82,13 @@ height: 37px;
 background-color : #ddff99 ;
  height: 17px;	
 }
+
+#mode  {
+  
+  
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
