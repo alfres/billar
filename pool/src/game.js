@@ -25,7 +25,6 @@ function reseting2(){
  
 
   Crafty.sprite("img/table.png", {table:[0,0,1000,565]});
-  
   Crafty.sprite("img/ball_1.png", {bo1:[0,0,141,141]});
   Crafty.sprite("img/ball_2.png", {bo2:[0,0,141,141]});
   Crafty.sprite("img/ball_3.png", {bo3:[0,0,141,141]});

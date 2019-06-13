@@ -223,19 +223,7 @@ thi.fuera = true
 thi.quieto = true;	
 }
 
-function checkbola(thi){ 
 
-if(thi.old['oldx'] == (thi._body.position.x.toFixed()) && thi.old['oldy'] == (thi._body.position.y.toFixed(1))){
-thi.quieto = true
-} else{
-	thi.old['oldx'] = thi._body.position.x.toFixed()
-	thi.old['oldy'] = thi._body.position.y.toFixed(1)
-	thi.quieto = false
-	
-}
-
-
-}
 
 
 
