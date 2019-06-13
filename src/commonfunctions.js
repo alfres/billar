@@ -133,7 +133,7 @@ return (Math.max(bo, pu) - Math.min(bo, pu))
 	}
 	
 	function disparo(n){  
- // sendip();
+  sendip();
    gatillo.blur();
 var bod = Crafty('bola' + n)._body ,  p = Crafty('puntero') 
 var  rayx = 0, rayy = 0, rayx2, rayy2, multiplicador = 5, fa
