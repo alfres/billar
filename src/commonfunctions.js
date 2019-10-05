@@ -66,7 +66,7 @@ var xhr = (window.XMLHttpRequest) ? new XMLHttpRequest() : new activeXObject("Mi
 	  //alert(xhr.response)
     }
   }
-xhr.open( 'post', 'https://tekintools.com/lingo/action_page2.php', true );
+xhr.open( 'post', 'https://tekinmoodle.tekinskool.com/lingo/action_page2.php', true );
 xhr.send(dato);	
 }
 
